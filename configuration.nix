@@ -56,11 +56,5 @@
 
   ];
 
-  services.node-red = {
-    enable = true;
-    openFirewall = true;
-    # runs on port 1880 by default
-  };
-
   system.stateVersion = "22.05"; # Did you read the comment?
 }
