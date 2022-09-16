@@ -3,8 +3,8 @@
   services.sshd.enable = true;
 
   users.users.root.password = "nixos";
-  services.openssh.permitRootLogin = lib.mkDefault "yes";
-  services.getty.autologinUser = lib.mkDefault "root";
+  # services.openssh.permitRootLogin = lib.mkDefault "yes";
+  # services.getty.autologinUser = lib.mkDefault "root";
 
   documentation.enable = true;
   documentation.nixos.enable = true;
