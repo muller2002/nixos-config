@@ -11,28 +11,42 @@
     in
     rec {
       packages.${system} = {
-        proxmoxLxcTarball = nixosConfigurations.nixos-test.config.system.build.tarball;
+        proxmoxLxcTarball = nixosConfigurations.nixos-minimal.config.system.build.tarball;
       };
 
-      nixosConfigurations.nixos-test = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
-          ({ modulesPath, ... }: {
-            imports = [
-              (modulesPath + "/virtualisation/proxmox-lxc.nix")
-            ];
-            config = {
-              nix.registry.nixpkgs = {
-                from = {
-                  id = "nixpkgs";
-                  type = "indirect";
+      nixosConfigurations =
+        let
+          base = {
+            system = "x86_64-linux";
+            modules = [
+              ./configuration.nix
+              ./node-red.nix
+              ({ modulesPath, ... }: {
+                imports = [
+                  (modulesPath + "/virtualisation/proxmox-lxc.nix")
+                ];
+                config = {
+                  nix.registry.nixpkgs = {
+                    from = {
+                      id = "nixpkgs";
+                      type = "indirect";
+                    };
+                    flake = nixpkgs;
+                  };
                 };
-                flake = nixpkgs;
-              };
-            };
-          })
-        ];
-      };
+              })
+            ];
+          };
+
+        in
+        {
+          nixos-minimal = nixpkgs.lib.nixosSystem
+            base
+          ;
+
+          nixos-node-red = nixpkgs.lib.nixosSystem
+            base
+          ;
+        };
     };
 }
