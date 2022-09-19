@@ -2,7 +2,7 @@
 {
   services.hydra = {
     enable = true;
-    hydraURL = "https://hydra.marlena.app:3000";
+    hydraURL = "https://hydra.marlena.app";
     notificationSender = "hydra@localhost";
     buildMachinesFiles = [ ];
     useSubstitutes = true;

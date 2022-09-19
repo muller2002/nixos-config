@@ -46,8 +46,12 @@
           nixos-node-red = nixpkgs.lib.nixosSystem
             base // {
             modules = base.modules ++ [ ./node-red.nix ];
-          }
-          ;
+          };
+
+          nixos-hydra = nixpkgs.lib.nixosSystem
+            base // {
+            modules = base.modules ++ [ ./hydra.nix ];
+          };
         };
     };
 }
