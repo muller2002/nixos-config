@@ -20,7 +20,6 @@
             system = "x86_64-linux";
             modules = [
               ./configuration.nix
-              ./node-red.nix
               ({ modulesPath, ... }: {
                 imports = [
                   (modulesPath + "/virtualisation/proxmox-lxc.nix")
@@ -45,7 +44,9 @@
           ;
 
           nixos-node-red = nixpkgs.lib.nixosSystem
-            base
+            base // {
+            modules = base.modules ++ [ ./node-red.nix ];
+          }
           ;
         };
     };
