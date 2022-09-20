@@ -1,6 +1,4 @@
 { config, lib, pkgs, ... }:
 {
-  environment.systemPackages = [
-    pkgs.nodePackages.node-red
-  ];
+  services.node-red.enable = true;
 }
